@@ -15,19 +15,6 @@ var command = process.argv[2];
 
 var arg = process.argv[3];
 
-if (command === "do-what-it-says") {
-    fs.readFile("random.txt", "utf8", function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-        var arr = data.split(",");
-        command = arr[0];
-        arg = arr[1];
-
-        runSwitch();
-    });
-}
-
 function runSwitch() {
     switch (command) {
         case "my-tweets":
@@ -71,6 +58,18 @@ function runSwitch() {
                 else {
                     console.log(err);
                 }
+            });
+            break;
+        case "do-what-it-says":
+            fs.readFile("random.txt", "utf8", function (err, data) {
+                if (err) {
+                    return console.log(err);
+                }
+                var arr = data.split(",");
+                command = arr[0];
+                arg = arr[1];
+
+                runSwitch();
             });
             break;
     }
